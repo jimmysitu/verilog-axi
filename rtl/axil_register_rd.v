@@ -77,7 +77,7 @@ generate
 
 // AR channel
 
-if (AR_REG_TYPE > 1) begin
+if (AR_REG_TYPE > 1) begin: AR_SKID_BUF
 // skid buffer, no bubble cycles
 
 // datapath registers
@@ -159,7 +159,7 @@ always @(posedge clk) begin
     end
 end
 
-end else if (AR_REG_TYPE == 1) begin
+end else if (AR_REG_TYPE == 1) begin : AR_BUF
 // simple register, inserts bubble cycles
 
 // datapath registers
@@ -211,7 +211,7 @@ always @(posedge clk) begin
     end
 end
 
-end else begin
+end else begin : AR_BYPASS
 
     // bypass AR channel
     assign m_axil_araddr = s_axil_araddr;
@@ -223,7 +223,7 @@ end
 
 // R channel
 
-if (R_REG_TYPE > 1) begin
+if (R_REG_TYPE > 1) begin : R_SKID_BUF
 // skid buffer, no bubble cycles
 
 // datapath registers
@@ -305,7 +305,7 @@ always @(posedge clk) begin
     end
 end
 
-end else if (R_REG_TYPE == 1) begin
+end else if (R_REG_TYPE == 1) begin : R_BUF
 // simple register, inserts bubble cycles
 
 // datapath registers
@@ -357,7 +357,7 @@ always @(posedge clk) begin
     end
 end
 
-end else begin
+end else begin : R_BYPASS
 
     // bypass R channel
     assign s_axil_rdata = m_axil_rdata;
