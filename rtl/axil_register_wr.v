@@ -86,7 +86,7 @@ generate
 
 // AW channel
 
-if (AW_REG_TYPE > 1) begin
+if (AW_REG_TYPE > 1) begin : AW_SKID_BUF
 // skid buffer, no bubble cycles
 
 // datapath registers
@@ -168,7 +168,7 @@ always @(posedge clk) begin
     end
 end
 
-end else if (AW_REG_TYPE == 1) begin
+end else if (AW_REG_TYPE == 1) begin : AW_BUF
 // simple register, inserts bubble cycles
 
 // datapath registers
@@ -220,7 +220,7 @@ always @(posedge clk) begin
     end
 end
 
-end else begin
+end else begin : AW_BYPASS
 
     // bypass AW channel
     assign m_axil_awaddr = s_axil_awaddr;
@@ -232,7 +232,7 @@ end
 
 // W channel
 
-if (W_REG_TYPE > 1) begin
+if (W_REG_TYPE > 1) begin : W_SKID_BUF
 // skid buffer, no bubble cycles
 
 // datapath registers
@@ -314,7 +314,7 @@ always @(posedge clk) begin
     end
 end
 
-end else if (W_REG_TYPE == 1) begin
+end else if (W_REG_TYPE == 1) begin : W_BUF
 // simple register, inserts bubble cycles
 
 // datapath registers
@@ -366,7 +366,7 @@ always @(posedge clk) begin
     end
 end
 
-end else begin
+end else begin : W_BYPASS
 
     // bypass W channel
     assign m_axil_wdata = s_axil_wdata;
@@ -378,7 +378,7 @@ end
 
 // B channel
 
-if (B_REG_TYPE > 1) begin
+if (B_REG_TYPE > 1) begin : B_SKID_BUF
 // skid buffer, no bubble cycles
 
 // datapath registers
@@ -454,7 +454,7 @@ always @(posedge clk) begin
     end
 end
 
-end else if (B_REG_TYPE == 1) begin
+end else if (B_REG_TYPE == 1) begin : B_BUF
 // simple register, inserts bubble cycles
 
 // datapath registers
@@ -503,7 +503,7 @@ always @(posedge clk) begin
     end
 end
 
-end else begin
+end else begin : B_BYPASS
 
     // bypass B channel
     assign s_axil_bresp = m_axil_bresp;

@@ -77,7 +77,7 @@ generate
 
 // AR channel
 
-if (AR_REG_TYPE > 1) begin: AR_SKID_BUF
+if (AR_REG_TYPE > 1) begin : AR_SKID_BUF
 // skid buffer, no bubble cycles
 
 // datapath registers
